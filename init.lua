@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- Global indentation settings for all filetypes
 vim.opt.tabstop = 4 -- How many spaces a tab character displays as
@@ -173,7 +173,6 @@ vim.opt.confirm = true
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
--- Toggle file tree
 vim.keymap.set('n', '<leader>fe', ':NvimTreeFindFileToggle<CR>', { desc = '[F]ile [E]xplorer' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
