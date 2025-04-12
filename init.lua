@@ -93,6 +93,12 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+-- Global indentation settings for all filetypes
+vim.opt.tabstop = 4 -- How many spaces a tab character displays as
+vim.opt.shiftwidth = 4 -- How many spaces for each indent level
+vim.opt.softtabstop = 4 -- How many spaces when pressing <Tab>
+vim.opt.expandtab = true -- Convert tabs to spaces
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -163,6 +169,9 @@ vim.opt.confirm = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- Exit insert mode
+vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -728,6 +737,13 @@ require('lazy').setup({
     end,
   },
 
+  -- Autocomment
+  {
+    'numToStr/Comment.nvim',
+    lazy = false, -- load immediately so it works without delay
+    opts = {}, -- uses default setup
+  },
+
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
@@ -827,7 +843,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -873,11 +889,11 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'loctvl842/monokai-pro.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
+      require('monokai-pro').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
@@ -886,7 +902,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'monokai-pro'
     end,
   },
 
