@@ -173,6 +173,9 @@ vim.opt.confirm = true
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
+-- Toggle file tree
+vim.keymap.set('n', '<leader>fe', ':NvimTreeFindFileToggle<CR>', { desc = '[F]ile [E]xplorer' })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -737,6 +740,17 @@ require('lazy').setup({
     end,
   },
 
+  -- File tree
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require('nvim-tree').setup {}
+    end,
+  },
+
   -- Autocomment
   {
     'numToStr/Comment.nvim',
@@ -851,8 +865,6 @@ require('lazy').setup({
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'enter',
-        ['<Tab>'] = { 'select_next' },
-        ['<S-Tab>'] = { 'select_prev' },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
