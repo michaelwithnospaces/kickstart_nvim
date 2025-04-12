@@ -744,6 +744,13 @@ require('lazy').setup({
     opts = {}, -- uses default setup
   },
 
+  -- Auto pair
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter', -- Load only when entering insert mode (for performance)
+    opts = {}, -- Use default settings
+  },
+
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
