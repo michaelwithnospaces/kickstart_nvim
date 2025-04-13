@@ -693,6 +693,21 @@ require('lazy').setup({
     end,
   },
 
+  -- Become kangaroo
+  {
+    'ggandor/leap.nvim',
+    config = function()
+      local leap = require 'leap'
+
+      -- Use 'z' and 'Z' instead of default 's' and 'S'
+      vim.keymap.set({ 'n', 'x', 'o' }, 'z', '<Plug>(leap)')
+      vim.keymap.set('n', 'Z', '<Plug>(leap-from-window)')
+
+      -- Use Ctrl-n and Ctrl-p to traverse label groups
+      require('leap.user').set_repeat_keys('<C-n>', '<C-p>')
+    end,
+  },
+
   -- Autocomment
   {
     'numToStr/Comment.nvim',
