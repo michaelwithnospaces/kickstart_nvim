@@ -617,10 +617,9 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+        clangd = {},
+        pyright = {},
+        jdtls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -691,6 +690,25 @@ require('lazy').setup({
     config = function()
       require('nvim-tree').setup {}
     end,
+  },
+
+  -- Changes color of cursor line number to reflect vim mode
+  {
+    'mawkler/modicator.nvim',
+    dependencies = 'loctvl842/monokai-pro.nvim', -- Add your colorscheme plugin here
+    init = function()
+      -- These are required for Modicator to work
+      vim.o.cursorline = true
+      vim.o.number = true
+      vim.o.termguicolors = true
+    end,
+    opts = {
+      -- Warn if any required option above is missing. May emit false positives
+      -- if some other plugin modifies them, which in that case you can just
+      -- ignore. Feel free to remove this line after you've gotten Modicator to
+      -- work properly.
+      show_warnings = true,
+    },
   },
 
   -- Become kangaroo
