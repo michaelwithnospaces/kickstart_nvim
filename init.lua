@@ -111,6 +111,18 @@ vim.opt.confirm = true
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Show wrapped LSP diagnostic float
+vim.keymap.set('n', '<leader>e', function()
+  vim.diagnostic.open_float(nil, {
+    focus = true,
+    border = 'rounded',
+    source = 'if_many',
+    scope = 'line',
+  })
+  local win = vim.api.nvim_get_current_win()
+  vim.wo[win].wrap = true
+end, { desc = 'Show wrapped LSP error message' })
+
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
@@ -708,18 +720,6 @@ require('lazy').setup({
       -- work properly.
       show_warnings = true,
     },
-  },
-
-  -- Tmux integration
-  {
-    'aserowy/tmux.nvim',
-    config = function()
-      return require('tmux').setup {
-        navigation = {
-          enable_default_keybindings = true,
-        },
-      }
-    end,
   },
 
   -- Become kangaroo
