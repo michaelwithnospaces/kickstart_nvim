@@ -116,6 +116,7 @@ vim.keymap.set('n', '<leader>O', 'm`O<Esc>``', { desc = 'Insert line above witho
 
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
+vim.keymap.set('i', 'kj', '<Esc>', { desc = 'Exit insert mode with kj' })
 
 -- Open file explorer
 vim.keymap.set('n', '<leader>fe', ':NvimTreeFindFileToggle<CR>', { desc = '[F]ile [E]xplorer' })
