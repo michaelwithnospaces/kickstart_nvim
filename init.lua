@@ -108,6 +108,12 @@ vim.opt.confirm = true
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Insert line below without entering insert mode
+vim.keymap.set('n', '<leader>o', 'm`o<Esc>``', { desc = 'Insert line below without insert mode' })
+
+-- Insert line above without entering insert mode
+vim.keymap.set('n', '<leader>O', 'm`O<Esc>``', { desc = 'Insert line above without insert mode' })
+
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
