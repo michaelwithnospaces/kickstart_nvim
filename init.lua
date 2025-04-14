@@ -151,6 +151,17 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+-- Remove auto-commenting on new lines
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    -- c – auto-wrap comments using textwidth.
+    -- r – auto-insert the comment leader after hitting Enter in insert mode.
+    -- o – auto-insert the comment leader after hitting o or O in normal mode.
+    vim.opt.formatoptions:remove { 'r', 'o' }
+  end,
+})
+
 -- Highlight when yanking (copying) text
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
