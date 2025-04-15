@@ -108,6 +108,11 @@ vim.opt.confirm = true
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Replace with clipboard contents after deleting (then exit insert mode)
+vim.keymap.set('n', '<leader>rl', '"_dd"+gP', { desc = 'Delete [l]ine and [r]eplace with clipboard' })
+vim.keymap.set('n', '<leader>rw', '"_diw"+gP', { desc = 'Delete [w]ord and [r]eplace with clipboard' })
+vim.keymap.set('v', '<leader>rs', '"_d"+gP', { desc = 'Delete [s]election and [r]eplace with clipboard' })
+
 -- Insert line below without entering insert mode
 vim.keymap.set('n', '<leader>o', 'm`o<Esc>``', { desc = 'Insert line below without insert mode' })
 
@@ -951,7 +956,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
