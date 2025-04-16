@@ -108,6 +108,9 @@ vim.opt.confirm = true
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Copy all to clipboard
+vim.keymap.set('n', '<leader>a', ':%y+<CR>', { desc = 'Yank [a]ll to clipboard' })
+
 -- Replace with clipboard contents after deleting (then exit insert mode)
 vim.keymap.set('n', '<leader>rl', '"_dd"+gP', { desc = 'Delete [l]ine and [r]eplace with clipboard' })
 vim.keymap.set('n', '<leader>rw', '"_diw"+gP', { desc = 'Delete [w]ord and [r]eplace with clipboard' })
@@ -716,7 +719,7 @@ require('lazy').setup({
       -- if some other plugin modifies them, which in that case you can just
       -- ignore. Feel free to remove this line after you've gotten Modicator to
       -- work properly.
-      show_warnings = true,
+      show_warnings = false,
     },
   },
 
