@@ -171,6 +171,19 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Auto close nvim-tree when it is the last window
+vim.api.nvim_create_autocmd('BufEnter', {
+  nested = true,
+  callback = function()
+    -- Only one window open and it's NvimTree? Exit nvim.
+    local wins = vim.api.nvim_list_wins()
+    local bufs = vim.tbl_map(vim.api.nvim_win_get_buf, wins)
+    if #wins == 1 and vim.bo[bufs[1]].filetype == 'NvimTree' then
+      vim.cmd 'quit'
+    end
+  end,
+})
+
 -- Highlight when yanking (copying) text
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -207,27 +220,11 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
+  {
+    'sevko/vim-nand2tetris-syntax',
+    ft = { 'hdl', 'jack', 'asm' }, -- Lazy-load on Nand2Tetris filetypes
+  },
 
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
-  --
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -700,7 +697,17 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
     config = function()
-      require('nvim-tree').setup {}
+      require('nvim-tree').setup {
+        actions = {
+          open_file = {
+            quit_on_open = false, -- auto-close the tree when a file is opened
+            resize_window = true,
+          },
+        },
+        view = {
+          preserve_window_proportions = true,
+        },
+      }
     end,
   },
 
